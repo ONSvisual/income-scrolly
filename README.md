@@ -5,7 +5,7 @@ This is a code respository for a scrollytelling article published by the Office 
 
 The article was built using the [Svelte](https://svelte.dev/) javascript framework, [Mapbox GL JS (v1)](https://docs.mapbox.com/mapbox-gl-js/api/)* and the [Layer Cake](https://layercake.graphics/) charting library. It is based on [this scrollytelling template](https://github.com/ONSvisual/svelte-scrolly/), which is probably a better starting point for building/hacking your own scrollytelling projects. (This repository is shared "as is", without any detailed documentation.)
 
-*Note that Mapbox GL JS v2 is no longer open source. This repository relies on v1.13.1. [MapLibre GL](https://github.com/maplibre/maplibre-gl-js), and open source fork of Mapbox GL JS v1 with ongoing community support, is also available.)
+(*Note that Mapbox GL JS v2 is no longer open source. This repository relies on v1.13.1. [MapLibre GL](https://github.com/maplibre/maplibre-gl-js), an open source fork of Mapbox GL JS v1 with ongoing community support, is also available.)
 
 ## Running and hacking this code
 
