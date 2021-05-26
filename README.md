@@ -9,7 +9,7 @@ The article was built using the [Svelte](https://svelte.dev/) javascript framewo
 
 ## Running and hacking this code
 
-<span style="color:red; font-weight: bold;">This code is published in full as a learning tool. Please remove the content and ONS branding from anything you intend to publish based on this code.</span>
+:warning: **This code is published in full as a learning tool. Please remove the content and ONS branding from anything you intend to publish based on this code.**
 
 The easiest way to make a local copy of this repository is using **degit**, which you can install it using NPM.
 
