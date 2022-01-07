@@ -10,6 +10,7 @@
 	export let data;
 	export let height = 400;
 	export let labels = false;
+	export let cols = null;
 
 	const yKey = 'label';
 	const xKey = Object.keys(data[0]).filter(d => d !== yKey);
@@ -30,7 +31,7 @@
 	}
 </style>
 
-<div class="chart-container" style="height: {height}px">
+<div class="chart-container" style="height: {height}px" aria-hidden="true">
 	<LayerCake
 		padding={{ right: 0, bottom: 20, left: 150 }}
 		x={xKey}
@@ -61,4 +62,24 @@
 		</Html>
 		{/if}
 	</LayerCake>
+	{#if cols}
+	<table class="visuallyhidden">
+		<thead>
+			<tr>
+				{#each Object.keys(cols) as key}
+				<th>{cols[key]}</th>
+				{/each}
+			</tr>
+		</thead>
+		<tbody>
+			{#each [...data].reverse() as d}
+			<tr>
+				{#each Object.keys(cols) as key}
+				<td>{typeof d[key] == 'number' ? (d[key] * 100).toFixed(1) : d[key]}</td>
+				{/each}
+			</tr>
+			{/each}
+		</tbody>
+	</table>
+	{/if}
 </div>

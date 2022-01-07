@@ -134,7 +134,7 @@
 </style>
 
 <div class="container">
-<table class="header" style="{padding > 0 ? 'min-width: calc(100% - ' + padding + 'px)' : ''}" bind:clientHeight={headerHeight}>
+<table class="header" aria-hidden="true" style="{padding > 0 ? 'min-width: calc(100% - ' + padding + 'px)' : ''}" bind:clientHeight={headerHeight}>
 	<thead>
 		<tr>
 			{#if rank}

@@ -1,6 +1,6 @@
 {
-  "name": "@onsvisual/svelte-scrolly",
-  "homepage": "http://onsvisual.github.io/svelte-scrolly",
+  "name": "ons-income-scrolly",
+  "homepage": "http://onsvisual.github.io/income-scrolly",
   "version": "0.1.0",
   "scripts": {
     "build": "rollup -c",

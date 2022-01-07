@@ -87,14 +87,14 @@
 			let features = data.geojson.features.filter(f => codes.includes(f.properties[ladBounds.code]));
 			let polygon = union(...features);
 			let bounds = bbox(polygon);
-			map.fitBounds(bounds, { padding: 50, animate });
+			map.fitBounds(bounds, { padding: 50, speed: 0.6, animate });
 		}
 	}
 
 	// Fit map to specified min/max bounds [[xmin, ymin], [xmax, ymax]]
 	function fitBounds(bounds, animate = animation) {
 		if (map) {
-			map.fitBounds(bounds, { animate });
+			map.fitBounds(bounds, { speed: 0.6, animate });
 		}
 	}
 
@@ -309,6 +309,12 @@
 	}
 
 	// CHART CODE
+	// Config (for dot plots)
+	const dot = {
+		cols: d => ({label: d.lad19nm, min: d.min, max: d.max, avg: d.income }),
+		labels: {label: "Local authority", min: "Minimum, %", min: "Maximum, %", avg: "Average, %"}
+	};
+
 	// State
 	let scatter = {
 		xKey: "income",
@@ -628,14 +634,14 @@
 			{/each}
 		</select>
 	</p>
-	<h2 class="section-title">Income deprivation in {selected.lad19nm}</h2>
+	<h2 class="section-title" aria-live="polite" aria-atomic="true">Income deprivation in {selected.lad19nm}</h2>
 	<p>
 		In <Em color={hiColor}>{selected.lad19nm}</Em>, <strong>{(selected.income * 100).toFixed(1)}%</strong> of the population was income-deprived in 2019. Of the 316 local authorities in England (excluding the Isles of Scilly), {selected.lad19nm} is ranked <strong>{data.lad.length - selected.income_rank + 1}{suffixer(data.lad.length - selected.income_rank + 1)} most income-deprived</strong>.
 	</p>
 </Section>
 
 <Media col="medium" height={300}>
-	<h3 class="visuallyhidden">Beeswarm chart showing English local authorities by percentage of people in income deprivation, 2019</h3>
+	<!-- <h3 class="visuallyhidden">Beeswarm chart showing English local authorities by percentage of people in income deprivation, 2019</h3> -->
 	<div class="chart" aria-hidden="true">
 		<BeeswarmChart data={data.lad} xKey="income" bind:selected={selectedCode} bind:hovered on:select={chartSelect}/>
 		<div class="label label-title" style="top: calc(100% - 47px);">
@@ -1002,7 +1008,7 @@
 	grid="full"
 	height={60}
 	caption="Range and population weighted average of income deprivation levels for neighbourhoods within {selected.lad19nm}">
-	<div><DotPlotChart labels={true} height={60} data={[data.lad.find(d => d.lad19cd == selected.lad19cd)].map(d => { return {label: d.lad19nm, min: d.min, max: d.max, avg: d.income }})}/></div>
+	<div><DotPlotChart labels={true} height={60} data={[data.lad.find(d => d.lad19cd == selected.lad19cd)].map(dot.cols)} cols={dot.labels}/></div>
 </Media>
 
 <Section>
@@ -1031,7 +1037,7 @@
 	grid="full"
 	height={400}
 	caption="The 20 local authorities with the largest gap between their most and least income-deprived neighbourhoods.">
-	<div><DotPlotChart data={data.lad.sort((a, b) => (b.range) - (a.range)).slice(0, 20).map(d => { return {label: d.lad19nm, min: d.min, max: d.max, avg: d.income }}).reverse()}/></div>
+	<div><DotPlotChart data={data.lad.sort((a, b) => (b.range) - (a.range)).slice(0, 20).map(dot.cols).reverse()} cols={dot.labels}/></div>
 </Media>
 
 <Section>
@@ -1051,7 +1057,7 @@
 	grid="full"
 	height={400}
 	caption="The 20 local authorities with the smallest gap between their most and least income-deprived neighbourhoods.">
-	<div><DotPlotChart data={data.lad.sort((a, b) => (a.range) - (b.range)).slice(0, 20).map(d => { return {label: d.lad19nm, min: d.min, max: d.max, avg: d.income }}).reverse()}/></div>
+	<div><DotPlotChart data={data.lad.sort((a, b) => (a.range) - (b.range)).slice(0, 20).map(dot.cols).reverse()} cols={dot.labels}/></div>
 </Media>
 
 <Section>
