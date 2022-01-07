@@ -62,24 +62,24 @@
 		</Html>
 		{/if}
 	</LayerCake>
-	{#if cols}
-	<table class="visuallyhidden">
-		<thead>
-			<tr>
-				{#each Object.keys(cols) as key}
-				<th>{cols[key]}</th>
-				{/each}
-			</tr>
-		</thead>
-		<tbody>
-			{#each [...data].reverse() as d}
-			<tr>
-				{#each Object.keys(cols) as key}
-				<td>{typeof d[key] == 'number' ? (d[key] * 100).toFixed(1) : d[key]}</td>
-				{/each}
-			</tr>
-			{/each}
-		</tbody>
-	</table>
-	{/if}
 </div>
+{#if cols}
+<table class="visuallyhidden">
+	<thead>
+		<tr>
+			{#each Object.keys(cols) as key}
+			<th>{cols[key]}</th>
+			{/each}
+		</tr>
+	</thead>
+	<tbody>
+		{#each [...data].reverse() as d}
+		<tr>
+			{#each Object.keys(cols) as key}
+			<td>{typeof d[key] == 'number' ? (d[key] * 100).toFixed(1) : d[key]}</td>
+			{/each}
+		</tr>
+		{/each}
+	</tbody>
+</table>
+{/if}
